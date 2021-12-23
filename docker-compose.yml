@@ -26,7 +26,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: mongock:latest
-#    environment:
-#      spring.data.mongodb.uri: mongodb://root:g4SVxH5G4unHugVq@mongo:27017/
+    environment:
+      spring.data.mongodb.uri: mongodb://mongo:27017/test
     depends_on:
       - mongo
