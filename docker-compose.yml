@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+
+  mongo:
+    image: bitnami/mongodb:latest
+    hostname: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGODB_ADVERTISED_HOSTNAME: 'mongo'
+      ALLOW_EMPTY_PASSWORD: 'yes'
+
+  mongo-express:
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: 'true'
+    depends_on:
+      - mongo
+
+  mongock:
+    container_name: mongock
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mongock:latest
+#    environment:
+#      spring.data.mongodb.uri: mongodb://root:g4SVxH5G4unHugVq@mongo:27017/
+    depends_on:
+      - mongo
